@@ -12,14 +12,16 @@
     border-radius: 5px;
     border-width: 0.11vw;
     border-color: black;
+    margin-top: 2vh;
 }
 
 #hexcodegjettet {
-    margin-top: 10vh;
+    margin-left: -5.3vw;
     border-radius: 5px;
     border-width: 0.11vw;
     border-color: black;
     display: none;
+    position: fixed;
 }
 
 #colorDisplay {
@@ -28,6 +30,7 @@
     width: 11vw;
     height: 22vh;
     border-radius: 30px;
+    margin-bottom: 8vh;
 }
 
 #KnappogHexBoks {

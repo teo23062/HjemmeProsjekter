@@ -3,85 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Random Hex Color</title>
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-    <h1 id="Overskrift">Tilfedlig Hex Kode</h1>
-    <div id="KnappogHexBoks">
-        <h3>Din tilfedlige farge er...</h3>
+    <h1 id="Heading">Random Hex Color</h1>
+    <div id="ButtonAndHexBox">
+        <h3>Your random color is...</h3>
         <div id="colorDisplay"></div>
-        <input placeholder="Gjett her: " id="hexcodegjettet" maxlength="7"><br>
-        <button onclick="generateRandomColor(clicks)" id="genererHex">Generer Tilfeldig</button>
-        <button onclick="gjettHex(hexColor, clicks)" id="gjettknapp">Gjett</button>
+        <input placeholder="Guess here: " id="guessedHex" maxlength="7"><br>
+        <button onclick="generateRandomColor()" id="generateHex">Generate Random</button>
+        <button onclick="guessHex()" id="guessButton">Guess</button>
     </div>
 
-    <div id="tidligereForsok">
-        <p class="tidligereforsoktekst">Dine tidligere forsøk:</p>
-        <div id="hexcolorgjett">
+    <div id="closestAttempt">
+        <p class="closestAttemptText">Closest attempt</p>
+        <div id="closests"></div>
+    </div>
 
-        </div>
+    <div id="previousAttempts">
+        <p class="previousAttemptText">Your previous attempts:</p>
+        <div id="guessedColorDisplay"></div>
+    </div>
+
+    <div id="helpBox">
+        <div id="help"></div>
     </div>
 
     <script>
         var hexColor;
-
         var clicks = 0;
+        var score = 11;
+        var closestDifference = Infinity;
+        var closestGuess = null;
+
         function generateRandomColor() {
+            score = 11;
             var red = Math.floor(Math.random() * 256);
             var green = Math.floor(Math.random() * 256);
             var blue = Math.floor(Math.random() * 256);
 
             hexColor = "#" + componentToHex(red) + componentToHex(green) + componentToHex(blue);
 
-            document.getElementById("gjettknapp").disabled = false;
+            document.getElementById("guessButton").textContent = "Guess";
+            document.getElementById("guessButton").disabled = false;
             clicks = 0;
             document.getElementById("colorDisplay").style.backgroundColor = hexColor;
-            document.getElementById("hexcodegjettet").style.display = "initial";
-            document.getElementById("hexcodegjettet").value = "";
-            document.getElementById("hexcolorgjett").innerHTML = "";
-            console.log(hexColor);
+            document.getElementById("guessedHex").style.display = "initial";
+            document.getElementById("guessedHex").value = "";
+            document.getElementById("closests").innerHTML = "";
+            document.getElementById("help").innerHTML = "";
+            document.getElementById("guessedColorDisplay").innerHTML = "";
+            console.log("Color: " + hexColor);
 
             return hexColor;
         }
 
-        function gjettHex() {
+        function guessHex() {
+            if (!hexColor) {
+                console.error("Hex color is undefined. Generate a random color first.");
+                return;
+            }
+
             clicks++;
             console.log(clicks);
-            if(clicks == 10) {
-                document.getElementById("gjettknapp").disabled = true;
-            }else {
-                document.getElementById("gjettknapp").disabled = false;
+
+            //Sjekker om man har klikket ti ganger eller ikke
+            if (clicks == 10) {
+                document.getElementById("guessButton").disabled = true;
+                document.getElementById("guessButton").textContent = "<<<< Try again";
+            } else {
+                document.getElementById("guessButton").disabled = false;
             }
-            var hexgjettet = document.getElementById("hexcodegjettet");
-            var hexgjettetValue = hexgjettet.value;
 
-            if (hexgjettetValue.toLowerCase() === hexColor.toLowerCase()) {
-                console.log("Korrekt");
-                document.getElementById("gjettknapp").disabled = true;
 
-                var outputElement = document.getElementById("hexcolorgjett");
+            var guessedHexValue = document.getElementById("guessedHex").value;
+            if (!guessedHexValue.startsWith("#")) {
+                guessedHexValue = "#" + guessedHexValue;
+            }
+            console.log("Guessed Hex Value: " + guessedHexValue);
+            console.log("Hex Color: " + hexColor);
+
+            var outputElement = document.getElementById("guessedColorDisplay");
+            if (!outputElement) {
+                console.error("Output element not found.");
+                return;
+            }
+
+            //Sjekker nærmeste hex color gjettet
+            var guessedInt = parseInt(guessedHexValue.substring(1), 16);
+            var hexInt = parseInt(hexColor.substring(1), 16);
+            var difference = Math.abs(guessedInt - hexInt);
+
+            console.log("Difference: " + difference);
+            console.log("Closest difference: " + closestDifference);
+
+            if (difference < closestDifference) {
+            closestGuess = guessedHexValue;
+            closestDifference = difference;
+            
+            var closestGuessSpan = document.createElement("span");
+            closestGuessSpan.textContent = closestGuess + "\n";
+            closestGuessSpan.style.color = guessedHexValue;
+
+            var closestsElement = document.getElementById("closests");
+            closestsElement.innerHTML = "";
+            closestsElement.appendChild(closestGuessSpan);
+
+            for (var i = 0; i < closestGuess.length; i++) {
+                var digitSpan = document.createElement("span");
+                digitSpan.textContent = closestGuess[i];
+                digitSpan.style.color = guessedHexValue;
+            }
+
+        }
+
+
+
+            var helpDiv = document.getElementById('help');
+            helpDiv.innerHTML = '';
+
+            var inputValue = closestGuess;
+
+            if (inputValue) {
+                for (var i = 0; i < inputValue.length; i++) {
+                    var charDiv = document.createElement('div');
+                    charDiv.textContent = inputValue[i];
+                    charDiv.id = "charDiv_" + i;
+                    helpDiv.appendChild(charDiv);
+                }
+            }
+
+
+            
+
+            //Sjekker om man har riktig eller ikke
+            if (guessedHexValue.toLowerCase() === hexColor.toLowerCase()) {
+                console.log("Final score: " + score);
+                console.log("Correct");
+                document.getElementById("guessButton").disabled = true;
 
                 var newTextSpan = document.createElement("span");
-                newTextSpan.textContent = hexgjettetValue + "\n";
+                newTextSpan.textContent = "Score: " + score + "\n";
                 newTextSpan.style.color = "green";
 
                 outputElement.appendChild(newTextSpan);
             } else {
-                console.log("Feil!");
+                console.log("Wrong!");
+                score--;
+                console.log("Score: " + score);
 
-                var outputElement = document.getElementById("hexcolorgjett");
-                outputElement.textContent += hexgjettetValue + "\n";
-                outputElement.style.color = "red";
-            }
-        }
+                var guessSpan = document.createElement("span");
+                guessSpan.textContent = guessedHexValue + "\n";
+                guessSpan.style.color = guessedHexValue;
 
-        function handleGjettButton() {
-            generateRandomColor();
-            gjettHex();
-
-            if (hexgjettetValue.toLowerCase() === hexColor.toLowerCase()) {
-                document.getElementById("hexcolorgjett").value = "";
+                outputElement.appendChild(guessSpan);
             }
         }
 

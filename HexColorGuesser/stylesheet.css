@@ -1,21 +1,32 @@
-#Overskrift {
+#Heading {
     text-align: center;
     font-size: 4vh;
 }
 
-#genererHex {
+#generateHex {
     width: 8vw;
     height: 4vh;
-    background-color: rgb(160, 160, 160);
+    background-color: rgb(128, 86, 86);
     color: white;
     font-size: 1.7vh;
     border-radius: 5px;
     border-width: 0.11vw;
     border-color: black;
     margin-top: 2vh;
+}   
+
+#guessButton {
+    width: 8vw;
+    height: 4vh;
+    background-color: rgb(85, 117, 89);
+    color: white;
+    font-size: 1.7vh;
+    border-radius: 5px;
+    border-width: 0.11vw;
+    border-color: black;
 }
 
-#hexcodegjettet {
+#guessedHex {
     margin-left: -5.3vw;
     border-radius: 5px;
     border-width: 0.11vw;
@@ -33,31 +44,80 @@
     margin-bottom: 8vh;
 }
 
-#KnappogHexBoks {
+#ButtonAndHexBox {
     text-align: center;
     margin-top: 23vh;
 }
 
-#tidligereForsok {
-    width: 14vw;
+#previousAttempts {
+    width: 13vw;    
     height: 40vh;
-    margin-left: auto;
-    margin-right: 6vw;
-    margin-top: -45vh;
+    margin-left: 80%;
+    margin-top: -20%;
     border-radius:10px;
     border-width: 1vw;
     border-color: black;
     background-color: rgb(243, 243, 243);
     padding: 2px;
+    position: fixed;
+    padding: 10px;
 }
 
-.tidligereforsoktekst{
+.previousAttemptText {
     text-align: center;
+    font-weight: bold;
+    font-size: 18px;
 }
 
-#hexcolorgjett {
+#closestAttempt {
+    width: 13vw;    
+    height: 10vh;
+    margin-left: 80%;
+    margin-top: -27%;
+    border-radius:10px;
+    border-width: 1vw;
+    border-color: black;
+    background-color: rgb(243, 243, 243);
+    padding: 2px;
+    position: fixed;
+    padding: 10px;
+}
+
+.closestAttemptText{    
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#closests {
+    font-weight: bold;
+}
+
+#guessedColorDisplay {
     width: 14vw;
     height: 34vh;
     border-radius:10px;
     white-space: pre-line;
+    font-weight: bold;
+}
+
+#helpBox {
+    width: 20vw;    
+    height: 10vh;
+    margin-left: 73%;
+    margin-top: 3%;
+    border-radius:10px;
+    border-width: 1vw;
+    border-color: black;
+    background-color: rgb(243, 243, 243);
+    padding: 2px;
+    position: fixed;
+    padding: 10px;
+}
+
+#help div {
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 35px;
+    margin-right: 30px;
 }

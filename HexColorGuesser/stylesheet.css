@@ -27,12 +27,10 @@
 }
 
 #guessedHex {
-    margin-left: -5.3vw;
+    margin-left: 0.4vw;
     border-radius: 5px;
-    border-width: 0.11vw;
-    border-color: black;
     display: none;
-    position: fixed;
+
 }
 
 #colorDisplay {
@@ -102,15 +100,15 @@
 }
 
 #helpBox {
-    width: 20vw;    
+    width: 24vw;    
     height: 10vh;
-    margin-left: 73%;
+    margin-left: 69.2%;
     margin-top: 3%;
     border-radius:10px;
     border-width: 1vw;
     border-color: black;
     background-color: rgb(243, 243, 243);
-    padding: 2px;
+    padding: 10px;
     position: fixed;
     padding: 10px;
 }
@@ -118,6 +116,62 @@
 #help div {
     font-weight: bold;
     display: inline-block;
-    margin-top: 35px;
-    margin-right: 30px;
+    margin-top: 17px;
+    margin-right: 15px;
 }
+
+        .charDiv {
+            display: inline-block;
+            margin: 5px;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid black;
+        }
+        .correct {
+            background-color: lightgreen;
+        }
+        .incorrect {
+            background-color: lightcoral;
+        }
+        .input-container {
+            margin-left: 45%;
+            display: flex;
+            align-items: center;
+        }
+        .hash-box {
+            height: 20px;
+            width: 20px;
+            padding: 2px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid black;
+            font-weight: bold;
+        }
+        .guess-input {
+            height: 20px;
+            width: 10%;
+            padding: 2px;  
+            border-radius: 5px;
+        }
+
+        .charContainer {
+            position: relative;
+        }
+
+        .caret {
+            position: absolute;
+            width: 20px;
+            text-align: center;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .caret.above {
+            top: -20px;
+        }
+
+        .caret.below {
+            bottom: -20px;
+        }

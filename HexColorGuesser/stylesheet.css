@@ -120,58 +120,66 @@
     margin-right: 15px;
 }
 
-        .charDiv {
-            display: inline-block;
-            margin: 5px;
-            width: 30px;
-            height: 30px;
-            text-align: center;
-            line-height: 30px;
-            border: 1px solid black;
-        }
-        .correct {
-            background-color: lightgreen;
-        }
-        .incorrect {
-            background-color: lightcoral;
-        }
-        .input-container {
-            margin-left: 45%;
-            display: flex;
-            align-items: center;
-        }
-        .hash-box {
-            height: 20px;
-            width: 20px;
-            padding: 2px;
-            background-color: white;
-            border-radius: 5px;
-            border: 1px solid black;
-            font-weight: bold;
-        }
-        .guess-input {
-            height: 20px;
-            width: 10%;
-            padding: 2px;  
-            border-radius: 5px;
-        }
+.charDiv {
+    display: inline-block;
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid black;
+}
+.correct {
+    background-color: lightgreen;
+}
+.incorrect {
+    background-color: lightcoral;
+}
+.input-container {
+    margin-left: 45%;
+    display: flex;
+    align-items: center;
+}
+.hash-box {
+    height: 20px;
+    width: 20px;
+    padding: 2px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-weight: bold;
+}
+.guess-input {
+    height: 20px;
+    width: 10%;
+    padding: 2px;  
+    border-radius: 5px;
+}
 
-        .charContainer {
-            position: relative;
-        }
+.charContainer {
+    position: relative;
+}
 
-        .caret {
-            position: absolute;
-            width: 20px;
-            text-align: center;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+.caret {
+    position: absolute;
+    width: 20px;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
-        .caret.above {
-            top: -20px;
-        }
+.caret.above {
+    top: -20px;
+}
 
-        .caret.below {
-            bottom: -20px;
-        }
+.caret.below {
+    bottom: -20px;
+}
+
+#loginbutton {
+    text-decoration: none;
+    background-color: white;
+    border-radius: 1px;
+    width: 60px;
+    height: 30px;
+}

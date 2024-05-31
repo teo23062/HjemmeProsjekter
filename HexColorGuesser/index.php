@@ -7,6 +7,7 @@
     <title>Random Hex Color</title>
 </head>
 <body>
+    <button id="loginbutton"><a href="login.php">Login</a></button>
     <h1 id="Heading">Random Hex Color</h1>
     <div id="ButtonAndHexBox">
         <h3>Your random color is...</h3>
@@ -49,7 +50,7 @@ function generateRandomColor() {
     var blue = Math.floor(Math.random() * 256);
 
     hexColor = "#" + componentToHex(red) + componentToHex(green) + componentToHex(blue);
-
+    
     document.getElementById("guessButton").textContent = "Guess";
     document.getElementById("guessButton").disabled = false;
     clicks = 0;

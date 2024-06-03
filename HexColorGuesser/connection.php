@@ -8,7 +8,6 @@ function getDatabaseConnection() {
     if ($mysqli->connect_error) {
         die('Connection failed: ' . $mysqli->connect_error);
     }
-    
 
     // Setter tegnsettet til UTF-8
     if (!$mysqli->set_charset("utf8")) {

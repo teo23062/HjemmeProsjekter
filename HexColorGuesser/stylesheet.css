@@ -176,10 +176,79 @@
     bottom: -20px;
 }
 
+/* Logging siden */
+
 #loginbutton {
     text-decoration: none;
     background-color: white;
     border-radius: 1px;
-    width: 60px;
+    width: 70px;
     height: 30px;
 }
+
+
+#brukernavnInput {
+    width: 13%;
+    height: 30px;
+    margin-left: 44%;
+    margin-top: 15%;
+}
+
+#passordInput {
+    width: 13%;
+    height: 30px;
+    margin-left: 44%;
+    margin-top: 8px;
+}
+
+#logginknapp {
+    width: 110px;
+    margin-left: 47.8%;
+    margin-top: 8px;
+    background-color: rgb(165, 165, 255);
+    border-color: rgba(0, 0, 0, 0.37);
+}
+
+#registrerHer {
+    margin-left: 45%;
+}
+
+#tilbakeKnapp {
+    margin-left: 47%;
+}
+
+/* Registrer siden */
+
+#brukernavnReg {
+    width: 13%;
+    height: 30px;
+    margin-left: 44%;
+    margin-top: 15%;
+}
+
+#passordReg {
+    width: 13%;
+    height: 30px;
+    margin-left: 44%;
+    margin-top: 8px;
+}
+
+#epostReg {
+    width: 13%;
+    height: 30px;
+    margin-left: 44%;
+    margin-top: 8px;
+}
+
+#regKnapp {
+    width: 110px;
+    margin-left: 47.8%;
+    margin-top: 8px;
+    background-color: rgb(165, 165, 255);
+    border-color: rgba(0, 0, 0, 0.37);
+}
+
+#tilbakeKnapp {
+    margin-left: 47%;
+}
+

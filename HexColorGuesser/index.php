@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +10,18 @@
     <title>Random Hex Color</title>
 </head>
 <body>
-    <button id="loginbutton"><a href="login.php">Login</a></button>
+    <?php
+    if (isset($_SESSION["loggetinn"]) && $_SESSION["loggetinn"] === true) {
+        echo "<p>Du er logget inn som " . $_SESSION["brukernavn"] . ".</p>";
+        $buttonName = "<a href='logut.php'>Logg ut</a>";
+    } else {
+        echo "<p>Du er ikke logget inn.</p>";
+        $buttonName = "<a href='login.php'>Logg inn</a>";
+    }
+    ?>
+
+    <button id="loginbutton"><?php echo $buttonName; ?></button>
+
     <h1 id="Heading">Random Hex Color</h1>
     <div id="ButtonAndHexBox">
         <h3>Your random color is...</h3>

@@ -12,7 +12,6 @@
 <body>
     <?php
     if (isset($_SESSION["loggetinn"]) && $_SESSION["loggetinn"] === true) {
-        echo "<p>Du er logget inn som " . $_SESSION["brukernavn"] . ".</p>";
         $buttonName = "<a href='logut.php'>Logg ut</a>";
     } else {
         echo "<p>Du er ikke logget inn.</p>";

@@ -14,7 +14,6 @@
     if (isset($_SESSION["loggetinn"]) && $_SESSION["loggetinn"] === true) {
         $buttonName = "<a href='logut.php'>Logg ut</a>";
     } else {
-        echo "<p>Du er ikke logget inn.</p>";
         $buttonName = "<a href='login.php'>Logg inn</a>";
     }
     ?>
@@ -50,7 +49,7 @@
     </div>
 
 <script>
-    var hexColor;
+var hexColor;
 var clicks = 0;
 var score = 11;
 var closestDifference = Infinity;
@@ -130,27 +129,48 @@ function guessHex() {
     compareCharacters(hexColor, closestGuess);
 
     if (guessedHexValue.toLowerCase() === hexColor.toLowerCase()) {
-        console.log("Final score: " + score);
-        console.log("Correct");
-        document.getElementById("guessButton").disabled = true;
+    console.log("Final score: " + score);
+    console.log("Correct");
+    document.getElementById("guessButton").disabled = true;
 
-        var newTextSpan = document.createElement("span");
-        newTextSpan.textContent = "Score: " + score + "\n";
-        newTextSpan.style.color = "green";
+    // Send score data to the server
+    fetch('save.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            score: score
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.message); // Log response from the server
+    })
+    .catch(error => console.error('Error saving score:', error));
+    document.getElementById("guessButton").disabled = true;
 
-        outputElement.appendChild(newTextSpan);
-    } else {
-        console.log("Wrong!");
-        score--;
-        console.log("Score: " + score);
+    var newTextSpan = document.createElement("span");
+    newTextSpan.textContent = "Score: " + score + "\n";
+    newTextSpan.style.color = "green";
 
-        var guessSpan = document.createElement("span");
-        guessSpan.textContent = guessedHexValue + "\n";
-        guessSpan.style.color = guessedHexValue;
+    outputElement.appendChild(newTextSpan);
+} else {
+    console.log("Wrong!");
+    score--;
+    console.log("Score: " + score);
 
-        outputElement.appendChild(guessSpan);
-    }
+    var guessSpan = document.createElement("span");
+    guessSpan.textContent = guessedHexValue + "\n";
+    guessSpan.style.color = guessedHexValue;
 
+    outputElement.appendChild(guessSpan);
+}
     compareCharacters(hexColor, guessedHexValue);
 }
 

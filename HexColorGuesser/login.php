@@ -19,7 +19,6 @@
 </html>
 
 <?php
-
 session_start();
 
 include 'connection.php';
@@ -30,7 +29,7 @@ if (isset($_POST['login'])) {
     $brukernavn = $_POST["brukernavn"];
     $passord = $_POST["passord"];
 
-    $stmt = $mysqli->prepare("SELECT passord FROM hex_bruker WHERE brukernavn = ?");
+    $stmt = $mysqli->prepare("SELECT brukerid, passord FROM hex_bruker WHERE brukernavn = ?");
     $stmt->bind_param('s', $brukernavn);
 
     $stmt->execute();
@@ -39,10 +38,12 @@ if (isset($_POST['login'])) {
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
         $lagret_passord = $row['passord'];
+        $user_id = $row['id'];
 
         if (password_verify($passord, $lagret_passord)) {
-            $_SESSION["brukernavn"] = $brukernavn;
-            echo "Brukeren er logget inn.";
+            $_SESSION["loggetinn"] = true;
+            $_SESSION["brukerid"] = $user_id; // Lagrer brukerens ID i en sesjon
+            $_SESSION["score"] = 0;
             header("Location: index.php");
             $_SESSION["loggetinn"] = true;
             exit();

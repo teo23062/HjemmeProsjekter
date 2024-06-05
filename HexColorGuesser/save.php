@@ -3,26 +3,24 @@ session_start();
 
 include 'connection.php';
 
-if (isset($_SESSION['brukernavn']) && isset($_POST['score'])) {
-    $user_id = $_SESSION['brukernavn']; // Brukerens ID fra sesjonen
-    $score = $_POST['score']; // Poengene fra klienten
+if (isset($_SESSION['loggetinn']) && $_SESSION['loggetinn'] === true && isset($_POST['score'])) {
+    $brukernavn = $_SESSION['brukernavn']; // Assuming you store the username in the session
+    $score = $_POST['score'];
 
-    // Forbereder SQL-spørringen for å sette inn poengene i databasen
-    $stmt = $mysqli->prepare("INSERT INTO leaderboard (bruekrnavn, poeng) VALUES (?, ?)");
-    $stmt->bind_param('ii', $user_id, $score);
+    $stmt = $mysqli->prepare("INSERT INTO hex_leaderboard (brukernavn, poeng) VALUES (?, ?)");
+    $stmt->bind_param('si', $brukernavn, $score);
 
-    // Utfører SQL-spørringen og sjekker om den var vellykket
     if ($stmt->execute()) {
-        $response = ['message' => 'Poengene ble lagret vellykket'];
+        $response = ['message' => 'Score saved successfully'];
     } else {
-        $response = ['error' => 'Feil ved lagring av poeng'];
+        $response = ['error' => 'Failed to save score'];
     }
 
-    $stmt->close(); // Lukker SQL-spørringen
+    $stmt->close();
 } else {
-    $response = ['error' => 'Uautorisert tilgang']; // Hvis brukeren ikke er logget inn eller poengene ikke ble sendt
+    $response = ['error' => 'Unauthorized access'];
 }
 
-header('Content-Type: application/json'); // Setter riktig MIME-type for JSON
-echo json_encode($response); // Sender JSON-responsen til klienten
+header('Content-Type: application/json');
+echo json_encode($response);
 ?>

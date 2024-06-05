@@ -29,43 +29,44 @@ session_start();
     <table id="leaderboard">
         <thead>
             <tr>
-                <th>Username</th>
-                <th>Score</th>
+                <th>Brukernavn</th>
+                <th>Poeng</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Leaderboard data will be inserted here -->
+            <!-- Leaderboard-data vil bli satt inn her -->
         </tbody>
     </table>
 
     <script>
-        // Function to fetch and update the leaderboard
+        // Funksjon for å hente og oppdatere leaderboard
         function updateLeaderboard() {
             fetch('get_leaderboard.php')
-            .then(response => response.json())
-            .then(data => {
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Log data for debugging
+                    const tbody = document.querySelector('#leaderboard tbody');
+                    tbody.innerHTML = ''; // Tøm eksisterende rader
 
-                const tbody = document.querySelector('#leaderboard tbody');
-                tbody.innerHTML = ''; // Clear existing rows
-
-                data.forEach(entry => {
-                    const row = document.createElement('tr');
-                    const usernameCell = document.createElement('td');
-                    const scoreCell = document.createElement('td');
-                    usernameCell.textContent = entry.brukernavn; // Kontroller at dette er riktig nøkkelnavn
-                    scoreCell.textContent = entry.poeng; // Kontroller at dette er riktig nøkkelnavn
-                    row.appendChild(usernameCell);
-                    row.appendChild(scoreCell);
-                    tbody.appendChild(row);
-                });
-            })
-            .catch(error => console.error('Error fetching leaderboard data:', error));
-
+                    data.forEach(entry => {
+                        const row = document.createElement('tr');
+                        const usernameCell = document.createElement('td');
+                        const scoreCell = document.createElement('td');
+                        usernameCell.textContent = entry.brukernavn;
+                        scoreCell.textContent = entry.poeng;
+                        row.appendChild(usernameCell);
+                        row.appendChild(scoreCell);
+                        tbody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error fetching leaderboard data:', error));
         }
 
+        // Initial oppdatering
         updateLeaderboard();
 
-        setInterval(updateLeaderboard, 1);
+        // Oppdater leaderboard hvert 5. minutt (300000 millisekunder)
+        setInterval(updateLeaderboard, 300000);
     </script>
 </body>
 </html>

@@ -19,6 +19,7 @@
     ?>
 
     <button id="loginbutton"><?php echo $buttonName; ?></button>
+    <p><?php echo "<p>Du er logget inn som " . $_SESSION["brukernavn"] . ".</p>"?></p>
 
     <h1 id="Heading">Random Hex Color</h1>
     <div id="ButtonAndHexBox">

@@ -37,12 +37,14 @@ if (isset($_POST['login'])) {
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
+        $brukernavn = $row['brukernavn'];
         $lagret_passord = $row['passord'];
         $user_id = $row['id'];
 
         if (password_verify($passord, $lagret_passord)) {
             $_SESSION["loggetinn"] = true;
-            $_SESSION["brukerid"] = $user_id; // Lagrer brukerens ID i en sesjon
+            $_SESSION["brukerid"] = $user_id;
+            $_SESSION["brukernavn"] = $brukernavn;
             $_SESSION["score"] = 0;
             header("Location: index.php");
             $_SESSION["loggetinn"] = true;

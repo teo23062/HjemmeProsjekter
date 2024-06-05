@@ -1,24 +1,27 @@
 <?php
-// Include the database connection script
 include 'connection.php';
 
-// Fetch leaderboard data including username and score
-$result = $mysqli->query("SELECT brukernavn, poeng FROM hex_leaderboard ORDER BY poeng DESC");
+$response = [];
 
-if (!$result) {
-    // Handle query error
-    $error = $mysqli->error;
-    $response = ['error' => $error];
-} else {
-    // Fetch leaderboard data
-    $leaderboard = [];
-    while ($row = $result->fetch_assoc()) {
-        $leaderboard[] = $row;
+try {
+    // SQL-spørring for å hente brukernavn og poeng
+    $result = $mysqli->query("SELECT brukernavn, poeng FROM hex_leaderboard ORDER BY poeng DESC");
+
+    if (!$result) {
+        throw new Exception($mysqli->error);
+    } else {
+        // Henter leaderboard-data
+        $leaderboard = [];
+        while ($row = $result->fetch_assoc()) {
+            $leaderboard[] = $row;
+        }
+        $response = $leaderboard;
     }
-    $response = $leaderboard;
+} catch (Exception $e) {
+    // Fanger eventuelle feil og legger til i responsen
+    $response = ['error' => $e->getMessage()];
 }
 
-// Return response as JSON
 header('Content-Type: application/json');
 echo json_encode($response);
 ?>
